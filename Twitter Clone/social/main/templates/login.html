@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} ავტორიზაცია {% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+<h1>თქვენ უკვე ავტორიზებული ხართ !</h1>
+{% else %}
+<div class="col-md-6 offset-md-3">
+    <h1>ავტორიზაცია</h1><br/>
+</div>
+
+<form method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+    <div class="mb-3">
+      <input type="text" class="form-control" name="username" placeholder="მომხმარებლის სახელი...">
+    </div>
+    <div class="mb-3">
+      <input type="password" class="form-control" name="password" placeholder="პაროლი...">
+    </div>
+    <button type="submit" class="btn btn-primary">ავტორიზაცია</button>
+</form>
+
+{% endif %}
+
+{% endblock %}
